@@ -15,7 +15,8 @@ class Utility(commands.Cog):
         title = "Leaderboard",
         description = "Top 25 bot users.",
         color = 0x87CEEB)
-      embed.add_field(name="Users", value=".") # TODO: add db stuff here
+      top_25_bakeries = await self.bot.db.get_top_bakeries(ctx.author.id)
+      embed.add_field(name="Users", value=top_25_bakeries) 
 
 
 def setup(bot):
