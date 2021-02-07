@@ -1,5 +1,5 @@
 from templatebot import Bot
-from discord import AllowedMentions
+from discord import AllowedMentions, Activity, Game
 from os import environ as env
 from dotenv import load_dotenv
 
@@ -17,6 +17,7 @@ bot = Bot(
         everyone=False, roles=False, users=False, replied_user=True
     ),
     help_command=BakerHelp(),
+    activity=Game("with cupcakes")
 )
 
 bot.VERSION = "1.0.0"
