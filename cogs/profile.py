@@ -36,7 +36,7 @@ class Profile(commands.Cog):
             return await ctx.reply("Sorry, you can't have more then 1 bakery.")
 
         base = await ctx.reply("Starting bakery creation process...")
-        await sleep(2)
+        await sleep(0.75)
         await base.edit(content="What would you like to name your bakery?")
 
         try:
