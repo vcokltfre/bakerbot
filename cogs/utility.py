@@ -9,10 +9,13 @@ class Utility(commands.Cog):
         self.bot = bot
 
     @commands.command
-    async def about(self, ctx: commands.Context):
-        await ctx.send(
-            "**About**\n\nBakery bot is a new exciting discord bot where you'll be able to start your own bakery from the ground and rise to the top, compete with other users as the most-skilled bakery, bake rare items, and have fun using our new bot!\n\nTo start using this bot, type `b!start`, and follow the walkthrough."
-        )
+    @commands.cooldown(rate=1, per=5, type=commands.BucketType.user)
+    async def top(self, ctx: commands.Context):
+      embed = discord.Embed(
+        title = "Leaderboard",
+        description = "Top 25 bot users.",
+        color = 0x87CEEB)
+      embed.add_field(name="Users", value=".") # TODO: add db stuff here
 
 
 def setup(bot):
