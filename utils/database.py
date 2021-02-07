@@ -90,7 +90,7 @@ class DatabaseInterface:
         print(name, type(name))
         async with self.pool.acquire() as conn:
             return await conn.execute(
-                "INSERT INTO Recipes VALUES ($1, $1, $3, $4, $5);", name, quantity, human, value, ingredients
+                "INSERT INTO Recipes VALUES ($1, $2, $3, $4, $5);", name, quantity, human, value, ingredients
             )
 
     async def get_recipe(self, name: str):
