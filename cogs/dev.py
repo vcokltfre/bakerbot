@@ -12,6 +12,11 @@ class Dev(commands.Cog):
     async def status(self, ctx: commands.Context):
         await ctx.send(f"BakerBot version {self.bot.VERSION}\nDevelopers: vcokltfre#6868, elf#2169")
 
+    @commands.command(name="hardreset")
+    async def hardreset(self, ctx: commands.Context):
+        await self.bot.db.hardreset()
+        await ctx.send("Database has been reset.")
+
 
 def setup(bot: Bot):
   bot.add_cog(Dev(bot))
