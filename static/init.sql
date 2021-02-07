@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS Recipes (
     "name"            VARCHAR(64) NOT NULL,
     "produces_q"      INT NOT NULL,
     "produces_h"      VARCHAR(128) NOT NULL,
-    "price"           BIGINT NOT NULL,
+    "value"           BIGINT NOT NULL,
     "ingredients"     TEXT NOT NULL,
     PRIMARY KEY ("name")
 );
