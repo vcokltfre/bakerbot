@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS Users (
     badges          TEXT DEFAULT NULL,
     created         TIMESTAMP NOT NULL DEFAULT NOW(),
     banned          BOOLEAN NOT NULL DEFAULT FALSE,
+    staff           BOOLEAN NOT NULL DEFAULT FALSE,
     PRIMARY KEY (id)
 );
 
