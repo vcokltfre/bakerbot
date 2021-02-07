@@ -4,7 +4,7 @@ from discord.ext import commands
 from re import compile
 from asyncio import sleep
 
-validname = compile(r"[a-zA-Z0-9_ ]{1,256}")
+validname = compile(r"[a-zA-Z0-9_ ]{1,64}")
 
 
 class Profile(commands.Cog):
@@ -43,7 +43,7 @@ class Profile(commands.Cog):
             return await base.edit(content="The selection timed out. Please run start again in a little while.")
 
         if not validname.match(resp.content):
-            return await base.edit(content="That's not a valid name. Names must be alphanumeric and spaces, and be between 1 and 256 characters. Please run start again in a little while.")
+            return await base.edit(content="That's not a valid name. Names must be alphanumeric and spaces, and be between 1 and 64 characters. Please run start again in a little while.")
 
         name = resp.content
         resp = await self.bot.db.create_bakery(ctx.author.id, name)

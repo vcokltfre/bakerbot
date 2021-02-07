@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS Users (
 
 CREATE TABLE IF NOT EXISTS Bakeries (
     owner_id        BIGINT NOT NULL,
-    name            VARCHAR(256) NOT NULL,
+    name            VARCHAR(64) NOT NULL,
     inventory       TEXT NOT NULL,
     created         TIMESTAMP NOT NULL DEFAULT NOW(),
     total_xp        BIGINT NOT NULL DEFAULT 0,
