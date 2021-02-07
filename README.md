@@ -25,4 +25,4 @@ All data will only be stored if you explicitly opt in to the bot by running b!st
 
 ## Guidelines
 
-You are expect to act reasonably while using the bot, which means using appropriate names for bakeries or other input you give the bot. If you violate these guidelines or the spirit of these guidelines your bakery will be terminated and your account banned. These guidelines are subject to the enforcement of the bot developers, and they reserve the right to for any reason, explicitly stated here or not, close your bakery and suspend your account.
+You are expected to act reasonably while using the bot, which means using appropriate names for bakeries or other input you give the bot. If you violate these guidelines or the spirit of these guidelines your bakery will be terminated and your account banned. These guidelines are subject to the enforcement of the bot developers, and they reserve the right to for any reason, explicitly stated here or not, close your bakery and suspend your account.
