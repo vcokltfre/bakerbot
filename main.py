@@ -12,6 +12,12 @@ bot = Bot(
         everyone=False, roles=False, users=False, replied_user=True
     ),
 )
-bot.load_initial_cogs()
+
+bot.VERSION = "1.0.0"
+
+bot.load_initial_cogs(
+    "cogs.profile",
+    "cogs.dev"
+)
 
 bot.run(env.get("TOKEN", None))
