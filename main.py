@@ -2,6 +2,8 @@ from templatebot import Bot
 from discord import AllowedMentions
 from os import environ as env
 from dotenv import load_dotenv
+from cogs.help import BakerHelp
+
 
 load_dotenv(".env")
 
@@ -11,6 +13,7 @@ bot = Bot(
     allowed_mentions=AllowedMentions(
         everyone=False, roles=False, users=False, replied_user=True
     ),
+    help_command=BakerHelp(),
 )
 
 bot.VERSION = "1.0.0"
