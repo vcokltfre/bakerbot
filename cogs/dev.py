@@ -1,5 +1,13 @@
 from templatebot import Bot
 from discord.ext import commands
+from re import compile
+
+userre = compile(r"\b(<@!?[\d]{17,20}>|\d{17,20})\b")
+numre = compile(r"\d+")
+
+def find_id(text: str):
+    a = numre.search(text).group()
+    return int(a) if a else None
 
 
 class Dev(commands.Cog):
@@ -13,17 +21,27 @@ class Dev(commands.Cog):
         await ctx.send(f"BakerBot version {self.bot.VERSION}\nDevelopers: vcokltfre#6868, elf#2169")
 
     @commands.command(name="hardreset")
+    @commands.is_owner()
     async def hardreset(self, ctx: commands.Context):
         await self.bot.db.hardreset()
         await ctx.send("Database has been reset.")
 
     @commands.command(name="ban")
-    async def ban(self, ctx: commands.Context, id: int):
+    @commands.is_owner()
+    async def ban(self, ctx: commands.Context, id: str):
+        id = find_id(id)
+        if not id:
+            return await ctx.reply("User not found.")
         await self.bot.db.ban_user(id)
-        await ctx.reply("User has been banned.")
+        await self.bot.db.delete_bakery(id)
+        await ctx.reply("User has been banned, and their bakery deleted.")
 
     @commands.command(name="unban")
-    async def unban(self, ctx: commands.Context, id: int):
+    @commands.is_owner()
+    async def unban(self, ctx: commands.Context, id: str):
+        id = find_id(id)
+        if not id:
+            return await ctx.reply("User not found.")
         await self.bot.db.unban_user(id)
         await ctx.reply("User has been unbanned.")
 
