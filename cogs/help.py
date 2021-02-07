@@ -13,7 +13,7 @@ class BakerHelp(commands.HelpCommand):
             if not cog:
                 continue
             if len(cog.get_commands()) > 0:
-                cogs_to_display.append(f'**{cog.qualified_name}**')
+                cogs_to_display.append(f'`{cog.qualified_name}`')
 
         embed.add_field(name='**Modules**', value='\n'.join(cogs_to_display))
         channel = self.get_destination()
