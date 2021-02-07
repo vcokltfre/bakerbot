@@ -31,5 +31,6 @@ CREATE TABLE IF NOT EXISTS UserItems (
     "name"              VARCHAR(64) NOT NULL REFERENCES Recipes ("name"),
     "userid"            BIGINT NOT NULL REFERENCES Users ("id"),
     "qty"               BIGINT NOT NULL,
+    "baseitem"          BOOLEAN NOT NULL DEFAULT FALSE,
     PRIMARY KEY ("name", "userid")
 );
