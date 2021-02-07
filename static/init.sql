@@ -14,6 +14,6 @@ CREATE TABLE IF NOT EXISTS Bakeries (
     inventory       TEXT NOT NULL,
     created         TIMESTAMP NOT NULL DEFAULT NOW(),
     total_xp        BIGINT NOT NULL DEFAULT 0,
-    owned_h         BIGINT NOT NULL DEFAULT 0,
+    owned_h         BIGINT NOT NULL DEFAULT 250,
     PRIMARY KEY (owner_id)
 )

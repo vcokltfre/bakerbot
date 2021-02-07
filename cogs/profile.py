@@ -49,7 +49,7 @@ class Profile(commands.Cog):
         resp = await self.bot.db.create_bakery(ctx.author.id, name)
         await self.bot.logger.info(f"User {ctx.author} ({ctx.author.id}) created a bakery called {name}.")
 
-        await ctx.send(f"You have created a bakery called {name}! Here's to many days of baking fun :cupcake:")
+        await ctx.send(f"You have created a bakery called {name}, you've been given 250h to start out, spend it well! Here's to many days of baking fun :cupcake:")
 
     @commands.command(name="close")
     @commands.cooldown(rate=1, per=5, type=commands.BucketType.user)
@@ -91,7 +91,7 @@ class Profile(commands.Cog):
 
         embed = Embed(title=f"{ctx.author}'s Bakery", colour=0x87ceeb)
         embed.add_field(name="XP", value=str(xp))
-        embed.add_field(name="Owned h", value=str(h) + "h")
+        embed.add_field(name="Money", value=str(h) + "h")
 
         await ctx.reply(embed=embed)
 
