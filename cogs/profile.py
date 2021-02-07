@@ -28,7 +28,7 @@ class Profile(commands.Cog):
             bakery = await self.bot.db.get_bakery_id(ctx.author.id)
 
         if banned:
-            return await ctx.reply("You are banned from using BakeryBot for violating our bot's guidelines, therfore you're unable to create anymore bakeries.")
+            return await ctx.reply("You are banned from using BakerBot for violating our bot's guidelines, therfore you're unable to create any more bakeries.")
 
         if bakery:
             return await ctx.reply("Sorry, you can't have more then 1 bakery.")
