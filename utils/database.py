@@ -98,3 +98,9 @@ class DatabaseInterface:
             return await conn.fetchrow(
                 "SELECT * FROM Recipes WHERE name = $1;", name
             )
+     
+    async def get_top_bakeries(self, userid: int):
+        async with self.pool.acquire() as conn:
+            return await conn.fetchrow(
+                "SELECT * FROM Bakeries ORDER BY owned_h LIMIT 25;", userid
+            )
