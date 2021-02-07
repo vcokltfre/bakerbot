@@ -8,7 +8,7 @@ class Dev(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 
-    @commands.command(name="status")
+    @commands.command(name="status", aliases=["about", "info"])
     async def status(self, ctx: commands.Context):
         await ctx.send(f"BakerBot version {self.bot.VERSION}\nDevelopers: vcokltfre#6868, elf#2169")
 
