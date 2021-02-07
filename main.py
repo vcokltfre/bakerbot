@@ -12,6 +12,7 @@ load_dotenv(".env")
 bot = Bot(
     name="BakerBot",
     command_prefix="b!",
+    logging_url=env.get("WEBHOOK", None),
     allowed_mentions=AllowedMentions(
         everyone=False, roles=False, users=False, replied_user=True
     ),

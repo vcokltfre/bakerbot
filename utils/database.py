@@ -43,6 +43,22 @@ class DatabaseInterface:
         async with self.pool.acquire() as conn:
             return await conn.fetchrow("SELECT * FROM Users WHERE id = $1;", userid)
 
+    async def ban_user(self, userid: int):
+        user = await self.get_user_id(userid)
+        if not user:
+            await self.create_user(userid, "Unknown#0000")
+
+        async with self.pool.acquire() as conn:
+            return await conn.execute("UPDATE Users SET banned = TRUE WHERE id = $1;", userid)
+
+    async def unban_user(self, userid: int):
+        user = await self.get_user_id(userid)
+        if not user:
+            async with self.pool.acquire() as conn:
+                return await conn.execute("DELETE FROM Users WHERE id = $1;", userid)
+        async with self.pool.acquire() as conn:
+            return await conn.execute("UPDATE Users SET banned = FALSE WHERE id = $1;", userid)
+
     async def create_bakery(self, userid: int, name: str):
         async with self.pool.acquire() as conn:
             await conn.execute("INSERT INTO Bakeries (owner_id, name, inventory) VALUES ($1, $2, $3);", userid, name, dumps({}))
@@ -50,3 +66,7 @@ class DatabaseInterface:
     async def get_bakery_id(self, userid: int):
         async with self.pool.acquire() as conn:
             return await conn.fetchrow("SELECT * FROM Bakeries WHERE owner_id = $1;", userid)
+
+    async def delete_bakery(self, userid: int):
+        async with self.pool.acquire() as conn:
+            return await conn.execute("DELETE FROM Bakeries WHERE owner_id = $1;", userid)

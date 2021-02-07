@@ -17,6 +17,16 @@ class Dev(commands.Cog):
         await self.bot.db.hardreset()
         await ctx.send("Database has been reset.")
 
+    @commands.command(name="ban")
+    async def ban(self, ctx: commands.Context, id: int):
+        await self.bot.db.ban_user(id)
+        await ctx.reply("User has been banned.")
+
+    @commands.command(name="unban")
+    async def unban(self, ctx: commands.Context, id: int):
+        await self.bot.db.unban_user(id)
+        await ctx.reply("User has been unbanned.")
+
 
 def setup(bot: Bot):
   bot.add_cog(Dev(bot))
