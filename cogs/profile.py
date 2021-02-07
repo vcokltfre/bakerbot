@@ -4,7 +4,7 @@ from discord.ext import commands
 from re import compile
 from asyncio import sleep
 
-validname = compile(r"[a-zA-Z0-9_ ]{1,64}")
+validname = compile(r"\b[a-zA-Z0-9_ ]{1,64}\b")
 
 
 class Profile(commands.Cog):
