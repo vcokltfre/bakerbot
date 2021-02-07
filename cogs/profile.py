@@ -13,8 +13,7 @@ class Profile(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 
-    @commands.command(name="start")
-    @commands.cooldown(rate=1, per=5, type=commands.BucketType.user)
+    @commands.command(name="start", help="Start your adventure!", aliases=["begin"])
     async def signup(self, ctx: commands.Context):
         resp = await self.bot.db.create_user(ctx.author.id, str(ctx.author))
 
@@ -24,15 +23,14 @@ class Profile(commands.Cog):
         banned = False
         bakery = None
         if not resp:
-            user = await self.bot.db.get_user_id(ctx.author.id)
-            banned = user[4]
+            banned = (await self.bot.db.get_user_id(ctx.author.id))[5]
             bakery = await self.bot.db.get_bakery_id(ctx.author.id)
 
         if banned:
-            return await ctx.reply("You are banned from BakeryBot.")
+            return await ctx.reply("You are banned from using BakeryBot for violating our bot's guidelines, therfore you're unable to create anymore bakeries.")
 
         if bakery:
-            return await ctx.reply("You already have a bakery!")
+            return await ctx.reply("Sorry, you can't have more then 1 bakery.")
 
         base = await ctx.reply("Starting bakery creation process...")
         await sleep(2)
@@ -48,37 +46,10 @@ class Profile(commands.Cog):
 
         name = resp.content
         resp = await self.bot.db.create_bakery(ctx.author.id, name)
-        await self.bot.logger.info(f"User {ctx.author} ({ctx.author.id}) created a bakery called {name}.")
 
         await ctx.send(f"You have created a bakery called {name}! Here's to many days of baking fun :cupcake:")
 
-    @commands.command(name="close")
-    @commands.cooldown(rate=1, per=5, type=commands.BucketType.user)
-    async def close(self, ctx: commands.Context):
-        bakery = await self.bot.db.get_bakery_id(ctx.author.id)
-
-        if not bakery:
-            return await ctx.reply("You don't have a bakery to close!")
-
-        def check(m):
-            return m.author == ctx.author and m.channel == ctx.channel
-
-        base = await ctx.reply("Are you sure you wish to close your bakery? This action is irreversible and permanent. Type `yes` to proceed.")
-        try:
-            resp = await self.bot.wait_for("message", check=check, timeout=30.0)
-        except:
-            return await base.edit(content="Timed out.")
-
-        if resp.content.lower() == "yes":
-            await self.bot.db.delete_bakery(ctx.author.id)
-            await self.bot.logger.info(f"User {ctx.author} ({ctx.author.id}) deleted their bakery.")
-
-            return await base.edit(content="Your bakery has been closed :(")
-
-        await base.edit(content="Cancelled.")
-
-    @commands.command(name="me")
-    @commands.cooldown(rate=1, per=5, type=commands.BucketType.user)
+    @commands.command(name="me", aliases=["bakery"], help="View your bakery.")
     async def me(self, ctx: commands.Context):
         user = await self.bot.db.get_user_id(ctx.author.id)
         bakery = await self.bot.db.get_bakery_id(ctx.author.id)
@@ -90,7 +61,7 @@ class Profile(commands.Cog):
         xp = bakery[4]
         h = bakery[5]
 
-        embed = Embed(title=f"Your Bakery - {name}", colour=0x87ceeb)
+        embed = Embed(title=f"{ctx.author}'s Bakery", colour=0x87ceeb)
         embed.add_field(name="XP", value=str(xp))
         embed.add_field(name="Owned h", value=str(h) + "h")
 
