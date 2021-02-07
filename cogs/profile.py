@@ -10,4 +10,4 @@ class Profile(commands.Cog):
 
 
 def setup(bot: Bot):
-  bot.add_cog(Profile(bot))
+    bot.add_cog(Profile(bot))
