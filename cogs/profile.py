@@ -14,6 +14,7 @@ class Profile(commands.Cog):
         self.bot = bot
 
     @commands.command(name="start", help="Start your adventure!", aliases=["begin"])
+    @commands.cooldown(rate=1, per=5, type=commands.BucketType.user)
     async def signup(self, ctx: commands.Context):
         resp = await self.bot.db.create_user(ctx.author.id, str(ctx.author))
 
@@ -23,7 +24,7 @@ class Profile(commands.Cog):
         banned = False
         bakery = None
         if not resp:
-            banned = (await self.bot.db.get_user_id(ctx.author.id))[5]
+            banned = (await self.bot.db.get_user_id(ctx.author.id))[4]
             bakery = await self.bot.db.get_bakery_id(ctx.author.id)
 
         if banned:
@@ -46,10 +47,37 @@ class Profile(commands.Cog):
 
         name = resp.content
         resp = await self.bot.db.create_bakery(ctx.author.id, name)
+        await self.bot.logger.info(f"User {ctx.author} ({ctx.author.id}) created a bakery called {name}.")
 
         await ctx.send(f"You have created a bakery called {name}! Here's to many days of baking fun :cupcake:")
 
+    @commands.command(name="close")
+    @commands.cooldown(rate=1, per=5, type=commands.BucketType.user)
+    async def close(self, ctx: commands.Context):
+        bakery = await self.bot.db.get_bakery_id(ctx.author.id)
+
+        if not bakery:
+            return await ctx.reply("You don't have a bakery to close!")
+
+        def check(m):
+            return m.author == ctx.author and m.channel == ctx.channel
+
+        base = await ctx.reply("Are you sure you wish to close your bakery? This action is irreversible and permanent. Type `yes` to proceed.")
+        try:
+            resp = await self.bot.wait_for("message", check=check, timeout=30.0)
+        except:
+            return await base.edit(content="Timed out.")
+
+        if resp.content.lower() == "yes":
+            await self.bot.db.delete_bakery(ctx.author.id)
+            await self.bot.logger.info(f"User {ctx.author} ({ctx.author.id}) deleted their bakery.")
+
+            return await base.edit(content="Your bakery has been closed :(")
+
+        await base.edit(content="Cancelled.")
+
     @commands.command(name="me", aliases=["bakery"], help="View your bakery.")
+    @commands.cooldown(rate=1, per=5, type=commands.BucketType.user)
     async def me(self, ctx: commands.Context):
         user = await self.bot.db.get_user_id(ctx.author.id)
         bakery = await self.bot.db.get_bakery_id(ctx.author.id)
