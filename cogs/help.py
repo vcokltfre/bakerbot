@@ -5,7 +5,7 @@ class BakerHelp(commands.HelpCommand):
     async def send_bot_help(self, mapping):
         embed = discord.Embed(
             title="Menu:",
-            description="BakerBot is a discord multi-function bot designed to bring never-seen before fun features on discord!\n\n**Developers**\n`\@vcokltfre#6868`\n`elf#2169`",
+            description="BakerBot is a discord multi-function bot designed to bring never-seen before fun features on discord!\n\n**Developers**\n`@vcokltfre#6868`\n`elf#2169`",
             color=0x87ceeb
         )
         cogs_to_display = []
