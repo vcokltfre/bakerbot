@@ -21,7 +21,9 @@ bot.VERSION = "1.0.0"
 bot.load_initial_cogs(
     "cogs.profile",
     "cogs.dev",
-    "cogs.recipe"
+    "cogs.recipe",
+    "cogs.utility",
+    "cogs.help"
 )
 
 bot.run(env.get("TOKEN", None))
