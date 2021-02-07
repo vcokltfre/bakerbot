@@ -29,7 +29,7 @@ class Profile(commands.Cog):
 
         if banned:
             return await ctx.reply(
-                "You are banned from using BakerBot for violating our bot's guidelines, therfore you're unable to create any more bakeries."
+                "You are banned from using BakerBot for violating our bot's guidelines, therefore you're unable to create any more bakeries."
             )
 
         if bakery:
