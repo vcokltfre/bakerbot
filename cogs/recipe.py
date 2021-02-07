@@ -28,7 +28,7 @@ class Recipe(commands.Cog):
 
     @commands.command(name="recipe")
     async def recipe(self, ctx: commands.Context, *, item: str):
-        r = self.get_recipe(item)
+        r = self.get_recipe(item.lower())
 
         if not r:
             return await ctx.send("No recipe by that name was found sorry!")
