@@ -1,0 +1,27 @@
+[
+  {
+    "name": "bread",
+    "ingredients":[
+      {
+        "name": "flour",
+        "amount": 5
+      },
+      {
+        "name": "butter",
+        "amount": 1
+      },
+      {
+        "name": "yeast",
+        "amount": 1
+      },
+      {
+        "name": "salt",
+        "amount": 1
+      }
+    ],
+    "produces": {
+      "amount": 25,
+      "human": "25 Slices of Bread"
+    }
+  }
+]
