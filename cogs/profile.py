@@ -111,6 +111,10 @@ class Profile(commands.Cog):
 
         await ctx.reply(embed=embed)
 
+    @commands.command(name="top")
+    async def top(self, ctx: commands.Context):
+        await ctx.send(str(await self.bot.db.get_top_bakeries()))
+
 
 def setup(bot: Bot):
     bot.add_cog(Profile(bot))
