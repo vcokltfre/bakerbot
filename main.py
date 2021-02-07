@@ -17,18 +17,14 @@ bot = Bot(
         everyone=False, roles=False, users=False, replied_user=True
     ),
     help_command=BakerHelp(),
-    activity=Game("with cupcakes")
+    activity=Game("with cupcakes"),
 )
 
 bot.VERSION = "1.0.0"
 bot.db = DatabaseInterface()
 
 bot.load_initial_cogs(
-    "cogs.profile",
-    "cogs.dev",
-    "cogs.recipe",
-    "cogs.utility",
-    "cogs.help"
+    "cogs.profile", "cogs.dev", "cogs.recipe", "cogs.utility", "cogs.help"
 )
 
 bot.run(env.get("TOKEN", None))

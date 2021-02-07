@@ -5,6 +5,7 @@ from re import compile
 userre = compile(r"\b(<@!?[\d]{17,20}>|\d{17,20})\b")
 numre = compile(r"\d+")
 
+
 def find_id(text: str):
     a = numre.search(text).group()
     return int(a) if a else None
@@ -18,7 +19,9 @@ class Dev(commands.Cog):
 
     @commands.command(name="status", aliases=["about", "info"])
     async def status(self, ctx: commands.Context):
-        await ctx.send(f"BakerBot version {self.bot.VERSION}\nDevelopers: vcokltfre#6868, elf#2169")
+        await ctx.send(
+            f"BakerBot version {self.bot.VERSION}\nDevelopers: vcokltfre#6868, elf#2169"
+        )
 
     @commands.command(name="hardreset")
     @commands.is_owner()
@@ -47,4 +50,4 @@ class Dev(commands.Cog):
 
 
 def setup(bot: Bot):
-  bot.add_cog(Dev(bot))
+    bot.add_cog(Dev(bot))

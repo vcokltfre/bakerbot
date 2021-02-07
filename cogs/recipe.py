@@ -31,12 +31,16 @@ class Recipe(commands.Cog):
         r = self.get_recipe(item.lower())
 
         if not r:
-            return await ctx.send("I searched far and wide, but sadly I couldn't find that recipe :(")
+            return await ctx.send(
+                "I searched far and wide, but sadly I couldn't find that recipe :("
+            )
 
-        req = "\n".join([f"{i['amount']} {i['name']}" for i in r['ingredients']])
+        req = "\n".join([f"{i['amount']} {i['name']}" for i in r["ingredients"]])
 
-        await ctx.send(recipe_template.format(item=item, prod=r["produces"]["human"], req=req))
+        await ctx.send(
+            recipe_template.format(item=item, prod=r["produces"]["human"], req=req)
+        )
 
 
 def setup(bot: Bot):
-  bot.add_cog(Recipe(bot))
+    bot.add_cog(Recipe(bot))
