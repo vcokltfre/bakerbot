@@ -11,7 +11,7 @@ def find_id(text: str):
     return int(a) if a else None
 
 
-class Dev(commands.Cog):
+class Dev(commands.Cog, command_attrs=dict(hidden=True)):
     """Developer commands for BakerBot"""
 
     def __init__(self, bot: Bot):
