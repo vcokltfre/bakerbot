@@ -20,7 +20,9 @@ class DatabaseInterface:
 
     async def hardreset(self):
         async with self.pool.acquire() as conn:
-            await conn.execute("DROP TABLE UserItems; DROP TABLE Recipes; DROP TABLE Bakeries; DROP TABLE Users;")
+            await conn.execute(
+                "DROP TABLE UserItems; DROP TABLE Recipes; DROP TABLE Bakeries; DROP TABLE Users;"
+            )
         self.pool = None
         await self.init()
 
@@ -86,18 +88,23 @@ class DatabaseInterface:
                 "DELETE FROM Bakeries WHERE owner_id = $1;", userid
             )
 
-    async def create_recipe(self, name: str, quantity: int, human: str, value: int, ingredients: str):
+    async def create_recipe(
+        self, name: str, quantity: int, human: str, value: int, ingredients: str
+    ):
         print(name, type(name))
         async with self.pool.acquire() as conn:
             return await conn.execute(
-                "INSERT INTO Recipes VALUES ($1, $2, $3, $4, $5);", name, quantity, human, value, ingredients
+                "INSERT INTO Recipes VALUES ($1, $2, $3, $4, $5);",
+                name,
+                quantity,
+                human,
+                value,
+                ingredients,
             )
 
     async def get_recipe(self, name: str):
         async with self.pool.acquire() as conn:
-            return await conn.fetchrow(
-                "SELECT * FROM Recipes WHERE name = $1;", name
-            )
+            return await conn.fetchrow("SELECT * FROM Recipes WHERE name = $1;", name)
 
     async def get_top_bakeries(self):
         async with self.pool.acquire() as conn:

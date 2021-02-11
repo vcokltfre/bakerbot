@@ -11,12 +11,11 @@ class Utility(commands.Cog):
     @commands.command
     @commands.cooldown(rate=1, per=5, type=commands.BucketType.user)
     async def top(self, ctx: commands.Context):
-      embed = discord.Embed(
-        title = "Leaderboard",
-        description = "Top 25 bot users.",
-        color = 0x87CEEB)
-      top_25_bakeries = await self.bot.db.get_top_bakeries(ctx.author.id)
-      embed.add_field(name="Users", value=top_25_bakeries) 
+        embed = discord.Embed(
+            title="Leaderboard", description="Top 25 bot users.", color=0x87CEEB
+        )
+        top_25_bakeries = await self.bot.db.get_top_bakeries(ctx.author.id)
+        embed.add_field(name="Users", value=top_25_bakeries)
 
 
 def setup(bot):

@@ -23,16 +23,14 @@ class Recipe(commands.Cog):
     async def get_recipe(self, name: str):
         r = await self.bot.db.get_recipe(name)
 
-        if not r: return None
+        if not r:
+            return None
 
         return {
             "name": r[0],
-            "produces": {
-                "amount": r[1],
-                "human": r[2]
-            },
+            "produces": {"amount": r[1], "human": r[2]},
             "value": r[3],
-            "ingredients": loads(r[4])
+            "ingredients": loads(r[4]),
         }
 
     @commands.command(name="recipe")
@@ -47,7 +45,9 @@ class Recipe(commands.Cog):
         req = "\n".join([f"{i['amount']} {i['name']}" for i in r["ingredients"]])
 
         await ctx.send(
-            recipe_template.format(item=item, prod=r["produces"]["human"], req=req, value=r["value"])
+            recipe_template.format(
+                item=item, prod=r["produces"]["human"], req=req, value=r["value"]
+            )
         )
 
     @commands.command(name="mkrecipe")
